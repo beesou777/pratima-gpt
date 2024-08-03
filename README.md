@@ -1,1 +1,1 @@
-# Svelte + TS + Vite + store
+# Svelte + TS + Vite + store + tailwind
