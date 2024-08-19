@@ -4,7 +4,13 @@ export default {
     './src/**/*.{html,js,svelte,ts}',
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary:'#6731EC',
+        white: '#fff',
+        'light-gray': '#182236',
+      },
+    }
   },
   plugins: []
 };
