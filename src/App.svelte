@@ -1,11 +1,13 @@
 <script lang="ts">
-  import { promptStore, responseStore, errorStore, generateContent } from "./store/generative";
+  import { promptStore, responseStore, errorStore, generateContent, isLoading } from "./store/generative";
   import Prompt from "./lib/Prompt.svelte";
   import Output from "./lib/Output.svelte";
 
   let prompt = "";
 
   $: promptStore.set(prompt);
+
+  $: isLoading.set(false);
 
   const handleGenerate = () => {
     generateContent();
@@ -19,7 +21,7 @@
 
 <main class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
   <h1 class="text-2xl font-bold mb-4">Pratima AI Prompt Application</h1>
-  <Output {responseStore} {errorStore} />
+  <Output {responseStore} {errorStore} {isLoading} />
   <Prompt {prompt} onGenerate={handleGenerate} handleInputData={handleInputData} />
 
 

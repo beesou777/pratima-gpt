@@ -155,3 +155,27 @@ h6,
 [data-reveal="right"] {
     transform: translate(50px, 0);
 }
+
+
+ul>li {
+    list-style: disc;
+}
+
+ul>li {
+    list-style: numbers;
+    margin-left: 20px;
+}
+
+ol,
+ul {
+    margin-left: 10px;
+    li {
+        margin-left: 20px;
+        padding:5px 0;
+    }
+
+}
+
+p{
+    padding: 10px 0;
+}

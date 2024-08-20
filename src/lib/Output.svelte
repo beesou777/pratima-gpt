@@ -1,12 +1,19 @@
 <script lang="ts">
 export let responseStore;
 export let errorStore;
+export let isLoading;
 </script>
-<main>
-    {#if $responseStore}
+<main class="w-full">
+
+  {#if $isLoading}
     <div class="mt-4 p-4 bg-white border border-gray-300 rounded max-w-[1550px] w-full" id="response">
+      <h2 class="text-lg font-semibold">Loading...</h2>
+    </div>
+  {/if}
+    {#if $responseStore}
+    <div class="mt-4 p-4 mb-[90px] bg-white border border-gray-300 rounded max-w-[1550px] w-full" id="response">
       <h2 class="text-lg font-semibold">Response:</h2>
-      <p>{$responseStore}</p>
+      {@html $responseStore}
     </div>
   {/if}
 
