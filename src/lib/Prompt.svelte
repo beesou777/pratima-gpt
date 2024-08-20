@@ -35,17 +35,22 @@
   class="fixed bottom-0 left-0 py-10 px-4 flex w-full justify-around items-center"
   id="msgs-box"
 >
-  <div class="relative flex items-end gap-1.5 md:gap-2 w-full bg-gray-200 rounded-[26px]">
-    <div class="flex min-w-0 flex-1 flex-col">
+  <div
+    class="relative flex items-end gap-1.5 md:gap-2 w-full bg-gray-200 rounded-[26px] pt-1.5"
+    id="prompt-box"
+  >
+    <div class="flex min-w-0 flex-1 flex-col pt-4">
       <textarea
         placeholder="Enter your prompt here..."
         bind:value={prompt}
         on:input={handleInput}
         on:keydown={handleKeyDown}
-        class="bg-gray-200 m-0 resize-none border-0 bg-transparent  text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-[25dvh] max-h-52 outline-none "
+        class="bg-gray-200 m-0 resize-none border-0 bg-transparent text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-[25dvh] max-h-52 outline-none"
       ></textarea>
     </div>
-    <button class="mb-2 me-1 flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">
+    <button
+      class="mb-2 me-1 flex h-8 w-8 items-center justify-center rounded-full bg-black text-white"
+    >
       <svg
         on:click={onGenerate}
         xmlns="http://www.w3.org/2000/svg"
@@ -67,21 +72,29 @@
 </div>
 
 <style lang="scss">
+  #prompt-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    padding-right: 0.85rem;
+  }
+
   textarea {
+    box-sizing: border-box;
     appearance: none;
-    -webkit-scrollbar: none; 
-    scrollbar-width: none; 
-    line-height: 1.5;  
-    padding: 10px 20px;  
-    resize: none; 
+    -webkit-scrollbar: none;
+    scrollbar-width: none;
+    line-height: 1.5;
+    resize: none;
     border: 0;
     background-color: transparent;
-    color: #333;  
+    color: #333;
     outline: none;
+    padding: 1.3rem 1.2rem;
   }
 
   textarea::-webkit-scrollbar {
     display: none;
   }
 </style>
-
