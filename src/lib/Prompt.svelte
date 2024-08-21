@@ -36,7 +36,7 @@
   id="msgs-box"
 >
   <div
-    class="relative flex items-end gap-1.5 md:gap-2 w-full bg-gray-200 rounded-[26px]"
+    class="relative flex items-end gap-1.5 md:gap-2 w-full bg-gray-800 rounded-[26px]"
     id="prompt-box"
   >
     <div class="flex min-w-0 flex-1 flex-col" id="parent-div">
@@ -45,7 +45,7 @@
         bind:value={prompt}
         on:input={handleInput}
         on:keydown={handleKeyDown}
-        class="bg-gray-200 m-0 resize-none border-0 bg-transparent text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-[25dvh] max-h-52 outline-none"
+        class="bg-gray-200 !text-white placeholder-gray-100  m-0 resize-none border-0 bg-transparent text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-[25dvh] max-h-52 outline-none"
       ></textarea>
     </div>
     <div class="pt-1">

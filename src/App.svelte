@@ -21,8 +21,8 @@
 
 </script>
 
-<main class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
-  <h1 class="text-2xl font-bold mb-4">Pratima AI Prompt Application</h1>
+<main class="flex flex-col items-center justify-center min-h-screen p-4 bg-primary text-white">
+  <h1 class="text-2xl font-bold py-4 px-1">Pratima AI Prompt Application</h1>
   <Output {errorStore} {isLoading}  {chatHistry} />
   <Prompt {prompt} onGenerate={handleGenerate} handleInputData={handleInputData}  />
 </main>

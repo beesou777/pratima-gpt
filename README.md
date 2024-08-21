@@ -1,1 +1,1 @@
-# Svelte + TS + Vite + store + tailwind
+# Pratima GPT
