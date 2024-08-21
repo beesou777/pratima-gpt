@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { promptStore, errorStore, generateContent, isLoading, chatHistry } from "./store/generative";
-  import Prompt from "./lib/Prompt.svelte";
-  import Output from "./lib/Output.svelte";
+  import { promptStore, errorStore, generateContent, isLoading, chatHistry } from './store/generative';
+  import Prompt from './lib/Prompt.svelte';
+  import Output from './lib/Output.svelte';
+  import { afterUpdate } from 'svelte';
 
-  let prompt = "";
+  let prompt = '';
 
   $: promptStore.set(prompt);
 
@@ -14,21 +15,37 @@
       generateContent();
     } catch (error) {
       console.error(error);
-    }finally{
-      prompt = "";
+    } finally {
+      prompt = '';
     }
-    
   };
 
   const handleInputData = (value: string) => {
     prompt = value;
   };
 
-
+  afterUpdate(() => {
+    const container = document.getElementById('app-container');
+    if (container) {
+      container.scrollTo({
+        top: container.scrollHeight + 100,
+        behavior: 'smooth',
+      });
+    }
+  });
 </script>
 
-<main class="flex flex-col items-center justify-center min-h-screen p-4 bg-primary text-white">
-  <h1 class="text-2xl font-bold py-4 px-1">Pratima AI Prompt Application</h1>
-  <Output {errorStore} {isLoading}  {chatHistry} />
-  <Prompt {prompt} onGenerate={handleGenerate} handleInputData={handleInputData}  />
+<main
+  class="flex flex-col items-center justify-center min-h-screen h-full p-4 bg-primary text-white"
+>
+ <div id="app-container" class="max-h-[calc(100vh-95px)] appearance-none overflow-y-auto min-w-full"> 
+  <Output {errorStore} {isLoading} {chatHistry} />
+ </div>
+  <Prompt {prompt} onGenerate={handleGenerate} {handleInputData} />
 </main>
+
+<style>
+  #app-container::-webkit-scrollbar {
+    display: none;
+  }
+</style>

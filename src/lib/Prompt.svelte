@@ -40,14 +40,14 @@
 </script>
 
 <div
-  class="fixed bottom-0 left-0 py-10 px-4 flex w-full justify-around items-center"
+  class="fixed bottom-0 left-[50%] translate-x-[-50%] py-10 px-4 flex max-w-[1024px] w-full justify-around items-center"
   id="msgs-box"
 >
   <div
     class="relative flex items-center gap-1.5 md:gap-2 w-full bg-gray-800 rounded-[26px]"
     id="prompt-box"
   >
-    <div class="flex min-w-0 flex-1 flex-col justify-center" id="parent-div">
+    <div class="flex flex-1 flex-col justify-center" id="parent-div">
       <textarea
         id="message"
         placeholder="Enter your prompt here..."

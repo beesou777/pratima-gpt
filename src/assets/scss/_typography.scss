@@ -179,3 +179,22 @@ ul {
 p{
     padding: 10px 0;
 }
+
+pre>code{
+    padding: 1rem;
+    background: #1e1e1e;
+    border-radius: 0.5rem;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+
+  pre>code::-webkit-scrollbar{
+    height: 4px;
+    background-color: white;
+  }
+
+  pre>code::-webkit-scrollbar-thumb{
+    background-color: #1e1e1e;
+    border-radius: 4px;
+  }
