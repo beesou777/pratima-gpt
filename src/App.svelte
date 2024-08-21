@@ -10,7 +10,13 @@
   $: isLoading.set(false);
 
   const handleGenerate = () => {
-    generateContent();
+    try {
+      generateContent();
+    } catch (error) {
+      console.error(error);
+    }finally{
+      prompt = "";
+    }
     
   };
 

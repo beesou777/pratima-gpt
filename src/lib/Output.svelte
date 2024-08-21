@@ -14,7 +14,7 @@
   $: chatHistry, scrollToBottom();
 </script>
 
-<main class="max-w-[1450px] mx-auto w-full bg-secondary {$chatHistry.length > 0 ? 'mb-[85px]' : ''}">
+<main class="max-w-[1450px] mx-auto w-full bg-secondary {$chatHistry.length > 0 ? 'mb-[95px]' : ''}">
   {#if $isLoading || (Array.isArray($chatHistry) && $chatHistry.length >= 0)}
     <div class="p-4 rounded max-w-[1550px] w-full" id="response">
       <h2 class="text-lg font-semibold text-center">Write your prompt</h2>
@@ -35,6 +35,12 @@
         </div>
         <div class="md:max-w-[45%] max-w-full w-full">
           <span class="text-gray-950 text-white font-bold">Pratima AI</span>
+          {#if !value.response}
+            <div class="bg-gray-950 px-10 rounded my-2">
+              <p>Generating response ....</p>
+            </div>
+          {/if}
+
           <div class="bg-gray-950 px-10 rounded my-2">
             {@html value.response}
           </div>

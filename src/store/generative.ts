@@ -1,5 +1,6 @@
-import { writable } from "svelte/store";
-import {GenerativeService} from "../service/generative_store"
+import { writable, get } from "svelte/store";
+import { GenerativeService } from "../service/generative_store";
+
 const generativeService = new GenerativeService();
 
 interface ChatHistry {
@@ -9,14 +10,13 @@ interface ChatHistry {
 
 export const promptStore = writable<string>("");
 export const errorStore = writable<string | null>(null);
-export const isLoading = writable<boolean | null>(false)
+export const isLoading = writable<boolean | null>(false);
 export const chatHistry = writable<ChatHistry[]>([]);
 
 export const generateContent = async () => {
   errorStore.set(null);
 
-  let promptValue: string;
-  promptStore.subscribe(value => promptValue = value);
+  const promptValue = get(promptStore);
 
   if (!promptValue) {
     errorStore.set("Prompt is required");
@@ -24,14 +24,25 @@ export const generateContent = async () => {
   }
 
   try {
-    isLoading.set(true)
+    isLoading.set(true);
+    chatHistry.update(history => [...history, { prompt: promptValue, response: "" }]);
+
     const text = await generativeService.generateContent(promptValue);
-    chatHistry.update(history => [...history, { prompt: promptValue, response: text.html }]);
-    promptValue = "";
+
+    chatHistry.update(history => {
+      const updatedHistory = history.slice();
+      const lastIndex = updatedHistory.length - 1;
+      if (lastIndex >= 0) {
+        updatedHistory[lastIndex].response = text.html;
+      }
+      return updatedHistory;
+    });
+
+    promptStore.set("");
   } catch (err: any) {
-    errorStore.set(err.message);
-    isLoading.set(false)
-  }finally{
-    isLoading.set(false)
+    errorStore.set(err.error);
+  } finally {
+    isLoading.set(false);
   }
 };
+

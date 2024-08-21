@@ -7,27 +7,35 @@
     const target = event.target as HTMLTextAreaElement;
     prompt = target.value;
     handleInputData(prompt);
-    adjustHeight(target);
+
+    adjustTextareaHeight(target);
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    const textarea = event.target as HTMLTextAreaElement;
+    const target = event.target as HTMLTextAreaElement;
 
-    if (event.key === "Enter" && event.shiftKey) {
+    if (event.key === 'Enter' && event.shiftKey) {
       event.preventDefault();
-      textarea.style.height = `${textarea.scrollHeight + 40}px`; // Increase height by 40px
+      const cursorPosition = target.selectionStart;
+      prompt = prompt.slice(0, cursorPosition) + '\n' + prompt.slice(cursorPosition);
+      target.value = prompt;
+      target.selectionEnd = cursorPosition + 1;
+      handleInputData(prompt);
+      adjustTextareaHeight(target);
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      onGenerate();
     }
   };
 
-  const adjustHeight = (textarea: HTMLTextAreaElement) => {
-    textarea.style.height = "auto";
-    textarea.style.height = `${textarea.scrollHeight}px`;
+  const adjustTextareaHeight = (textarea: HTMLTextAreaElement) => {
+    textarea.style.height = '60px';
+    textarea.style.height = `${textarea.scrollHeight + 2}px`;
   };
 
-  import { onMount } from "svelte";
-  onMount(() => {
-    const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
-    if (textarea) adjustHeight(textarea);
+  const message_box = document.getElementById('message');
+  message_box?.addEventListener('keyup', () => {
+    adjustTextareaHeight(message_box as HTMLTextAreaElement);
   });
 </script>
 
@@ -36,16 +44,18 @@
   id="msgs-box"
 >
   <div
-    class="relative flex items-end gap-1.5 md:gap-2 w-full bg-gray-800 rounded-[26px]"
+    class="relative flex items-center gap-1.5 md:gap-2 w-full bg-gray-800 rounded-[26px]"
     id="prompt-box"
   >
-    <div class="flex min-w-0 flex-1 flex-col" id="parent-div">
+    <div class="flex min-w-0 flex-1 flex-col justify-center" id="parent-div">
       <textarea
+        id="message"
         placeholder="Enter your prompt here..."
         bind:value={prompt}
         on:input={handleInput}
         on:keydown={handleKeyDown}
-        class="bg-gray-200 !text-white placeholder-gray-100  m-0 resize-none border-0 bg-transparent text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-[25dvh] max-h-52 outline-none"
+        class="!text-white placeholder-gray-100 m-0 resize-none border-0 bg-transparent text-token-text-primary focus:ring-0 focus-visible:ring-0 outline-none h-[60px]"
+        style="max-height: 40vh;"
       ></textarea>
     </div>
     <div class="pt-1">
@@ -78,34 +88,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
     padding-right: 0.85rem;
+    padding-left: 0.85rem;
   }
-
-  textarea {
-    box-sizing: border-box;
-    appearance: none;
-    -webkit-scrollbar: none;
-    scrollbar-width: none;
-    line-height: 1.5;
-    resize: none;
-    border: 0;
-    background-color: transparent;
-    color: #333;
-    outline: none;
-    padding: 1.3rem 1.5rem;
-    height: 100%;
+  textarea{
+    padding:1.1rem .75rem;
   }
 
   textarea::-webkit-scrollbar {
     display: none;
   }
 
-  #parent-div {
-    height: 100%;
-  }
-
-  #msgs-box{
-    padding-bottom: 1rem;
+  #message {
+    max-height: 40vh;
   }
 </style>
