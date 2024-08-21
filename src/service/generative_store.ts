@@ -6,7 +6,7 @@ export class GenerativeService {
   async generateContent(prompt: string): Promise<string> {
     try {
       const response = await axios.post(this.apiUrl, { prompt });
-      return Promise.resolve(response.data.html)
+      return Promise.resolve(response.data)
     } catch (error: any) {
       return Promise.reject(error)
     }
